@@ -1,0 +1,46 @@
+// Create the main container for the game board
+const gameContainer = document.createElement('div');
+gameContainer.classList.add('game-container');
+
+// Create the game board container
+const gameBoard = document.createElement('div');
+gameBoard.classList.add('game-board');
+
+// Append the game board container to the main container
+gameContainer.appendChild(gameBoard);
+
+// Generate an array of unique letters (A-H) for card pairs
+const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+
+// Duplicate the letters to create pairs
+const cardPairs = [...letters, ...letters];
+
+// Shuffle the card pairs randomly
+cardPairs.sort(() => Math.random() - 0.5);
+
+// Loop through the card pairs to create each card dynamically
+cardPairs.forEach((letter, index) => {
+    // Create a card element
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.dataset.letter = letter; // Set data attribute for letter
+    card.dataset.index = index; // Set data attribute for index
+    
+    // Create front and back elements for the card
+    const front = document.createElement('div');
+    front.classList.add('front');
+    
+    const back = document.createElement('div');
+    back.classList.add('back');
+    back.textContent = letter; // Set the back of the card to show the letter
+    
+    // Append front and back elements to the card
+    card.appendChild(front);
+    card.appendChild(back);
+    
+    // Append the card to the game board
+    gameBoard.appendChild(card);
+});
+
+// Append the game container to the body or another element in your HTML
+document.body.appendChild(gameContainer);
